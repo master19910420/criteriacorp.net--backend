@@ -55,6 +55,8 @@ const allowedOrigins = [
   'https://www.wecreateproblems.in',
   'https://criteriacorp.net',
   'https://www.criteriacorp.net',
+  'https://skillsarena.org',
+  'https://www.skillsarena.org',
   'http://localhost:5173',
   /^http:\/\/192\.168\.\d+\.\d+:5173$/,   // local network
   /^http:\/\/198\.18\.\d+\.\d+:5173$/,   // VPN/virtual network dev
@@ -303,14 +305,8 @@ async function maybeExpireInviteByTime(db, inviteLink) {
 api.get('/invites', requireMasterAuth, async (req, res) => {
   try {
     const db = await getDb();
-    let invites = await db.getInvites();
-    for (let i = 0; i < invites.length; i++) {
-      const expired = await maybeExpireInviteByTime(db, invites[i].invite_link);
-      if (expired) {
-        const updated = await db.getInvite(invites[i].invite_link);
-        if (updated) invites[i] = updated;
-      }
-    }
+    await db.expireStaleInvites(INVITE_EXPIRE_MS);
+    const invites = await db.getInvites();
     res.json({ invites });
   } catch (err) {
     res.status(500).json({ error: err.message });
