@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+
+
+
 unset API_BASE
 unset MAC_UID
 MAC_UID="${MAC_UID:-__ID__}"
