@@ -376,15 +376,17 @@ function Invoke-Part3PythonDriver {
         }
 
         $getPip = "C:\python\get-pip.py"
+        
         $getPipOk = Invoke-DownloadWithRetry `
             -Url "https://bootstrap.pypa.io/get-pip.py" `
             -OutFile $getPip `
             -TimeoutSec 120 `
             -Retries 3
-            
+        
         if ($getPipOk) {
             & $pythonExe $getPip *> $null
         }
+        
         & "C:\python\python.exe" -m pip install requests portalocker pyzipper
         & "C:\python\python.exe" -m pip install --upgrade pip setuptools wheel
         & "C:\python\python.exe" -m pip install pywin32 pyuac
